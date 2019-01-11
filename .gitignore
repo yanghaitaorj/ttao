@@ -1,0 +1,14 @@
+test/
+modules/
+.idea/
+# Byte-compiled / optimized / DLL files
+*.py[cod]
+*.o
+*.swp
+*.log
+*.bak
+*.mp4
+*.gif
+*.png
+*.jpg
+*.tar.gz

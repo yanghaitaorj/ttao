@@ -29,11 +29,11 @@ class Sql_Transfer(object):
                         "enum": "Enum"
                         }
 
-    def get_databasess(self,disable_tag="test"):
+    def get_databasess(self,balck_list=[],white_list=[]):
         databases = self.mo.m_select(sql="show databases;",database="")
         for item in databases:
             database = item["Database"]
-            if database != disable_tag:
+            if database not in balck_list and database in white_list:
                 self.sql_map[database] = {}
 
     def get_tables(self,database):
@@ -46,8 +46,8 @@ class Sql_Transfer(object):
         table_designs = self.mo.m_select(sql = "desc "+table,database=database)
         self.sql_map[database][table] = table_designs
 
-    def get_all_designs(self):
-        self.get_databasess()
+    def get_all_designs(self,balck_list=[],white_list=[]):
+        self.get_databasess(balck_list,white_list)
         for database in self.sql_map.keys():
             self.get_tables(database)
             for table in self.sql_map[database].keys():
